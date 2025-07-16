@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HDCP Password Generator</title>
+  <link rel="manifest" href="manifest.json" />
+  <style>
+    .app-logo {
+      width: 80px;
+      display: block;
+      margin: 0 auto 15px;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #45235d, #45235d);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 15px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 350px;
+      position: relative;
+    }
+    .form-group {
+      width: 100%;
+      margin: 0 auto;
+      max-width: 280px;
+      position: relative;
+    }
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin: 8px 0;
+      border: 1px solid #ffffff;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+    .password-container {
+      position: relative;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ffffff;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      background: #327c34;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .error {
+      color: #ff6b6b;
+      margin: 5px 0;
+      text-align: center;
+      font-size: 13px;
+      min-height: 18px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #backBtn {
+      position: absolute;
+      top: 0px;
+      left: 37px;
+      background: transparent !important;
+      border: none;
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+      width: auto;
+      height: auto;
+      line-height: 1;
+      user-select: none;
+    }
+    #backBtn:hover {
+      color: #327c34;
+    }
+    #copyBtn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 2px;
+      margin-left: 10px;
+      transition: transform 0.2s ease;
+      vertical-align: middle;
+      display: none;
+    }
+    #copyBtn:hover {
+      top: 100px;
+      left: 350px;
+      transform: scale(1.2);
+    }
+    @media (max-width: 400px) {
+    .container {
+      padding: 15px;
+      width: 100%;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+
+    input, button {
+      font-size: 13px;
+      padding: 8px;
+    }
+
+    #backBtn {
+      font-size: 16px;
+      left: 20px;
+    }
+
+    #copyBtn {
+      font-size: 18px;
+    }
+
+    .toggle-password {
+      font-size: 16px;
+    }
+  }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login" class="tab-content active">
+      <h2>PIXEL</h2>
+      <div class="form-group">
+        <input type="text" id="username" placeholder="Username" />
+        <div class="password-container">
+          <input type="password" id="password" placeholder="Password" />
+          <span class="toggle-password" title="Toggle Password Visibility">👁️</span>
+        </div>
+        <button id="loginBtn">Login</button>
+        <p id="loginError" class="error"></p>
+      </div>
+    </div>
+
+    <div id="generator" class="tab-content" style="display: none; position: relative;">
+      <button id="backBtn" title="Back to Login">◀</button>
+      <!-- <img src="icons/logo.png" alt="App Logo" class="app-logo" /> -->
+      <h2 style="color: #ffffff;">HDCP Generator</h2>
+      <div class="form-group">
+        <input type="text" id="secretKey" placeholder="Certificate" />
+        <input type="text" id="hdcpCode" placeholder="HDCP Code" />
+        <input type="date" id="dateInput" />
+        <input type="number" id="hourInput" placeholder="Hour (0-23)" min="0" max="23" />
+        <button id="generateBtn">Generate Password</button>
+        <div style="display: flex; align-items: center; margin-top: 10px;">
+          <div id="passwordOutput" class="error" style="color: #327c34; flex: 1;"></div>
+          <button id="copyBtn" title="Copy Password">📋</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered successfully'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
+  </script>
+
+</body>
+</html>
