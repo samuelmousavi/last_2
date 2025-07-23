@@ -1,11 +1,11 @@
 const CACHE_NAME = 'hdcp-cache-v1';
 const FILES_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/main.js',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  './',
+  './index.html',
+  './main.js',
+  './manifest.json',
+  './icons/icon-192.png',
+  './icons/icon-512.png'
 ];
 
 // نصب: فایل‌ها رو کش می‌کنیم
